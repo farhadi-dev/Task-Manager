@@ -6,7 +6,7 @@ from .serializers import TaskSerializer
 
 class TaskListCreateView(APIView):
     def get(self, request):
-        tasks = Task.objects.all()
+        tasks = Task.objects.all().order_by('-created_at')[:10]
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
 
